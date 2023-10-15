@@ -56,15 +56,23 @@
 		C47E9B1F2AD11B730072D003 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				C4BD3AF22ADC53C8008E4335 /* Resources */,
 				C47E9B202AD11B730072D003 /* AppDelegate.swift */,
 				C47E9B222AD11B730072D003 /* SceneDelegate.swift */,
 				C47E9B242AD11B730072D003 /* ImageListViewController.swift */,
 				C47E9B262AD11B730072D003 /* Main.storyboard */,
-				C47E9B292AD11B750072D003 /* Assets.xcassets */,
 				C47E9B2B2AD11B750072D003 /* LaunchScreen.storyboard */,
 				C47E9B2E2AD11B750072D003 /* Info.plist */,
 			);
 			path = ImageFeed;
+			sourceTree = "<group>";
+		};
+		C4BD3AF22ADC53C8008E4335 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C47E9B292AD11B750072D003 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
