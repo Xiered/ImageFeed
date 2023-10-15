@@ -22,6 +22,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" name="YP Background"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Z0T-bK-yed"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="QN1-Ou-Jhl"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
