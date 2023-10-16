@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,8 +19,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3Pf-dc-QpN">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="sectionIndexBackgroundColor" name="YP Background"/>
+                                <color key="backgroundColor" name="YP Background"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="Z0T-bK-yed"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="QN1-Ou-Jhl"/>
@@ -32,7 +30,7 @@
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="3Pf-dc-QpN" secondAttribute="trailing" id="Jnc-J3-6LY"/>
-                            <constraint firstAttribute="bottom" secondItem="3Pf-dc-QpN" secondAttribute="bottom" id="i8M-ww-7Hg"/>
+                            <constraint firstItem="3Pf-dc-QpN" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="i8M-ww-7Hg"/>
                             <constraint firstItem="3Pf-dc-QpN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="wEH-2O-7Ys"/>
                             <constraint firstItem="3Pf-dc-QpN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="xdr-wy-gN4"/>
                         </constraints>
@@ -53,8 +51,5 @@
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
