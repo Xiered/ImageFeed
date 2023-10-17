@@ -28,21 +28,27 @@ extension ImagesListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        configCell(for: imageListCell)
+        configCell(for: imageListCell, with: indexPath)
         
         return imageListCell
     }
-    
-    
-    
-    
 }
+
+extension ImagesListViewController {
+    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) { }
+}
+
 
 class ImagesListViewController: UIViewController {
 
     @IBOutlet private var tableView: UITableView!
     
-    func configCell(for cell: ImagesListCell) { }
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        return formatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
