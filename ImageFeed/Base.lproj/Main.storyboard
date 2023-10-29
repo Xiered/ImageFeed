@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dlI-nZ-yMi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jO1-8R-LE0">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -18,6 +18,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="2RM-qm-ksY"/>
+                        <segue destination="dlI-nZ-yMi" kind="relationship" relationship="viewControllers" id="Ek9-fc-i9V"/>
+                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ipn-ro-Qgb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -103,6 +107,7 @@
                             <constraint firstItem="3Pf-dc-QpN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="xdr-wy-gN4"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="TXd-rK-XFg"/>
                     <connections>
                         <outlet property="tableView" destination="3Pf-dc-QpN" id="7y3-Zi-ahD"/>
                     </connections>
@@ -169,6 +174,7 @@
                             <constraint firstItem="Crk-h9-1Oy" firstAttribute="leading" secondItem="9QK-IW-HmA" secondAttribute="leading" id="tTc-DX-yDK"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="tab_profile_active" id="PGe-O0-8Ob"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="xDX-1a-s9T" id="Obp-QD-t7K"/>
                         <outlet property="loginLabel" destination="eVa-ak-yLx" id="6pf-Z8-jwY"/>
@@ -187,6 +193,8 @@
         <image name="like_button_active" width="42" height="42"/>
         <image name="logout_button" width="44" height="44"/>
         <image name="profile_view" width="70" height="70"/>
+        <image name="tab_editorial_active" width="30" height="30"/>
+        <image name="tab_profile_active" width="30" height="30"/>
         <namedColor name="YP Background">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
