@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Stx-qb-MCU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jO1-8R-LE0">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -114,6 +114,7 @@
                     <navigationItem key="navigationItem" id="d69-X0-bBR"/>
                     <connections>
                         <outlet property="tableView" destination="3Pf-dc-QpN" id="7y3-Zi-ahD"/>
+                        <segue destination="Stx-qb-MCU" kind="show" identifier="ShowSingleImage" id="e3C-Pc-ZDC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -129,7 +130,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="DvU-qe-zRX">
-                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yWv-1O-dDN"/>
@@ -141,6 +142,7 @@
                             <constraint firstItem="DvU-qe-zRX" firstAttribute="leading" secondItem="yWv-1O-dDN" secondAttribute="leading" id="orE-ej-MuP"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="klv-g4-X0y"/>
                     <connections>
                         <outlet property="imageView" destination="DvU-qe-zRX" id="u5K-bo-HUd"/>
                     </connections>
