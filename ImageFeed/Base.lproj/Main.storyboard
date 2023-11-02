@@ -146,7 +146,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1qT-kF-al8">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="itp-qO-uaC" userLabel="Image View">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="itp-qO-uaC" userLabel="Image View">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                     </imageView>
                                 </subviews>
@@ -158,6 +158,9 @@
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="NYl-Ow-DZs"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="WbS-4F-8tP"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Stx-qb-MCU" id="D7k-gX-MoR"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yWv-1O-dDN"/>
@@ -173,6 +176,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="klv-g4-X0y"/>
                     <connections>
+                        <outlet property="imageView" destination="itp-qO-uaC" id="yzJ-VQ-3bQ"/>
                         <outlet property="scrollView" destination="1qT-kF-al8" id="OuI-Uf-oBq"/>
                     </connections>
                 </viewController>
