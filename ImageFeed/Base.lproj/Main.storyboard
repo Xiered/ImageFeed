@@ -131,18 +131,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tjk-MJ-iLW">
-                                <rect key="frame" x="8" y="8" width="48" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="48" id="XXs-tb-ydK"/>
-                                    <constraint firstAttribute="height" constant="48" id="bKn-7o-z69"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="backward_button"/>
-                                <connections>
-                                    <action selector="didTapBackButton" destination="Stx-qb-MCU" eventType="touchUpInside" id="VEI-RK-sNh"/>
-                                </connections>
-                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1qT-kF-al8">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
@@ -162,11 +150,33 @@
                                     <outlet property="delegate" destination="Stx-qb-MCU" id="D7k-gX-MoR"/>
                                 </connections>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="50" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUc-4N-oT7">
+                                <rect key="frame" x="182" y="810" width="50" height="50"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="share_button"/>
+                                <connections>
+                                    <action selector="didTapShareButton:" destination="Stx-qb-MCU" eventType="touchUpInside" id="VTE-ZG-ZVF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tjk-MJ-iLW">
+                                <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="XXs-tb-ydK"/>
+                                    <constraint firstAttribute="height" constant="48" id="bKn-7o-z69"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="backward_button"/>
+                                <connections>
+                                    <action selector="didTapBackButton" destination="Stx-qb-MCU" eventType="touchUpInside" id="EVm-mV-mbv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yWv-1O-dDN"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstItem="Tjk-MJ-iLW" firstAttribute="top" secondItem="yWv-1O-dDN" secondAttribute="top" constant="8" id="MlM-Bw-R20"/>
+                            <constraint firstItem="yWv-1O-dDN" firstAttribute="bottom" secondItem="fUc-4N-oT7" secondAttribute="bottom" constant="36" id="8sj-7A-HRB"/>
+                            <constraint firstItem="fUc-4N-oT7" firstAttribute="centerX" secondItem="yWv-1O-dDN" secondAttribute="centerX" id="9kX-2U-HPX"/>
+                            <constraint firstItem="yWv-1O-dDN" firstAttribute="top" secondItem="Tjk-MJ-iLW" secondAttribute="top" constant="-8" id="MlM-Bw-R20"/>
                             <constraint firstItem="1qT-kF-al8" firstAttribute="top" secondItem="opM-JS-6pp" secondAttribute="top" id="Vh5-Jp-fNx"/>
                             <constraint firstItem="1qT-kF-al8" firstAttribute="bottom" secondItem="opM-JS-6pp" secondAttribute="bottom" id="YdP-fC-Dio"/>
                             <constraint firstItem="1qT-kF-al8" firstAttribute="trailing" secondItem="yWv-1O-dDN" secondAttribute="trailing" id="gM7-Bc-gJp"/>
@@ -265,6 +275,7 @@
         <image name="like_button_active" width="42" height="42"/>
         <image name="logout_button" width="24" height="24"/>
         <image name="profile_view" width="70" height="70"/>
+        <image name="share_button" width="50" height="50"/>
         <image name="tab_editorial_active" width="30" height="30"/>
         <image name="tab_profile_active" width="30" height="30"/>
         <namedColor name="YP Background">
