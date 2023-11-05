@@ -15,6 +15,7 @@
 		C47E9B282AD11B730072D003 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C47E9B262AD11B730072D003 /* Main.storyboard */; };
 		C47E9B2A2AD11B750072D003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C47E9B292AD11B750072D003 /* Assets.xcassets */; };
 		C47E9B2D2AD11B750072D003 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C47E9B2B2AD11B750072D003 /* LaunchScreen.storyboard */; };
+		C4BFAC432AEF7FD5005E47BA /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BFAC422AEF7FD5005E47BA /* SingleImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		C47E9B292AD11B750072D003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C47E9B2C2AD11B750072D003 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C47E9B2E2AD11B750072D003 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4BFAC422AEF7FD5005E47BA /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				C45D7FF72ADD445100606801 /* ImagesList */,
 				C4BD3AF22ADC53C8008E4335 /* Resources */,
 				C47E9B202AD11B730072D003 /* AppDelegate.swift */,
+				C4BFAC422AEF7FD5005E47BA /* SingleImageViewController.swift */,
 				C47E9B222AD11B730072D003 /* SceneDelegate.swift */,
 				C47E9B262AD11B730072D003 /* Main.storyboard */,
 				C47E9B2B2AD11B750072D003 /* LaunchScreen.storyboard */,
@@ -172,6 +175,7 @@
 				C45D7FF62ADD43D000606801 /* ImagesListCell.swift in Sources */,
 				C41844BB2AE706A900068ED2 /* ProfileViewController.swift in Sources */,
 				C47E9B212AD11B730072D003 /* AppDelegate.swift in Sources */,
+				C4BFAC432AEF7FD5005E47BA /* SingleImageViewController.swift in Sources */,
 				C47E9B232AD11B730072D003 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
