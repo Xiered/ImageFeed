@@ -10,6 +10,7 @@ import UIKit
 final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         
         let avatarView = UIImageView()
         let avatarImage = UIImage(named: "profile_view")
