@@ -288,7 +288,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="nav_back_button"/>
                                 <connections>
-                                    <action selector="didTapBackButton:" destination="heX-or-Hi2" eventType="touchUpInside" id="Dhy-o7-glN"/>
+                                    <action selector="didTapBackButton:" destination="heX-or-Hi2" eventType="touchUpInside" id="6Vf-gm-QTQ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -304,7 +304,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="webView" destination="2sh-0j-K46" id="wQK-Sy-nsb"/>
+                        <outlet property="webView" destination="2sh-0j-K46" id="17S-c6-UVx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3d7-tO-oc0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
