@@ -291,19 +291,27 @@
                                     <action selector="didTapBackButton:" destination="heX-or-Hi2" eventType="touchUpInside" id="6Vf-gm-QTQ"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sa0-Yx-iel">
+                                <rect key="frame" x="0.0" y="44" width="414" height="4"/>
+                                <color key="progressTintColor" name="YP Black"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ywa-88-tz9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Wgr-of-9fc" firstAttribute="top" secondItem="Ywa-88-tz9" secondAttribute="top" id="8k2-0z-oYm"/>
                             <constraint firstItem="2sh-0j-K46" firstAttribute="top" secondItem="Ywa-88-tz9" secondAttribute="top" id="RDP-KU-cqX"/>
+                            <constraint firstItem="sa0-Yx-iel" firstAttribute="leading" secondItem="z7V-Lz-odU" secondAttribute="leading" id="o7I-82-4ID"/>
+                            <constraint firstItem="sa0-Yx-iel" firstAttribute="top" secondItem="Wgr-of-9fc" secondAttribute="bottom" id="oB3-nm-Emk"/>
                             <constraint firstItem="Ywa-88-tz9" firstAttribute="trailing" secondItem="2sh-0j-K46" secondAttribute="trailing" id="qLs-Zq-niF"/>
                             <constraint firstItem="Ywa-88-tz9" firstAttribute="bottom" secondItem="2sh-0j-K46" secondAttribute="bottom" id="rKh-rt-Jes"/>
+                            <constraint firstAttribute="trailing" secondItem="sa0-Yx-iel" secondAttribute="trailing" id="ss5-ZB-oZJ"/>
                             <constraint firstItem="Wgr-of-9fc" firstAttribute="leading" secondItem="Ywa-88-tz9" secondAttribute="leading" id="whb-Y0-ZMQ"/>
                             <constraint firstItem="2sh-0j-K46" firstAttribute="leading" secondItem="Ywa-88-tz9" secondAttribute="leading" id="z43-IX-rJ6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="progressView" destination="sa0-Yx-iel" id="h7K-xI-Cpq"/>
                         <outlet property="webView" destination="2sh-0j-K46" id="17S-c6-UVx"/>
                     </connections>
                 </viewController>
