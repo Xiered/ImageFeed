@@ -52,7 +52,6 @@ final class OAuth2Service {
                     completion(.failure(error))
                     return
                 }
-                
             })
             task.resume()
         }
