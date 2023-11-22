@@ -1,61 +1,132 @@
-//
-//  OAuth2Service.swift
-//  ImageFeed
-//
-//  Created by Дмитрий Герасимов on 16.11.2023.
-//
+import UIKit
 
-import Foundation
-
-final class OAuth2Service {
+class OAuth2Service {
+    static let shared = OAuth2Service()
     
-    private enum NetworkError: Error {
-        case urlSessionError
-    }
+    private let urlSession = URLSession.shared
     
-    func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
-        //      completion(.success(""))
-        // Обращение к URL
-        var components = URLComponents(string: "https://unsplash.com/oauth/token")
-        components?.queryItems = [URLQueryItem(name: "client_id", value: AccessKey),
-                                  URLQueryItem(name: "client_secret", value: SecretKey),
-                                  URLQueryItem(name: "redirect_uri", value: RedirectURI),
-                                  URLQueryItem(name: "code", value: "code"),
-                                  URLQueryItem(name: "grant_type", value: "authorization_code ")]
+    // Property for saving Authentication token
+    private (set) var authToken: String? {
         
-        if let url = components?.url {
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            // "Задание" для URL
-            let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-                
-                guard let data = data else { return }
-               guard let sessionResponse = try? JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
-                else {
-                   DispatchQueue.main.async {
-                       completion(.failure(NetworkError.urlSessionError))
-                   }
-                   return
-               }
-                DispatchQueue.main.async {
-                    completion(.success(""))
-                }
-                
-                if let response = response as? HTTPURLResponse,
-                   response.statusCode < 200 && response.statusCode >= 300 {
-                    DispatchQueue.main.async {
-                        completion(.failure(NetworkError.urlSessionError))
-                    }
-                }
-                
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-            })
-            task.resume()
+        get {
+            return OAuth2TokenStorage().token
+        }
+        set {
+            OAuth2TokenStorage().token = newValue
         }
     }
+    
+    // Method for executing a request to obtain a token
+    func fetchOAuthToken(_ code: String, completion: @escaping(Result<String, Error>) -> Void ) {
+        let request = authTokenRequest(code: code)
+        let task = object(for: request) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let body):
+                let authToken = body.accessToken
+                self.authToken = authToken
+                completion(.success(authToken))
+            case .failure(let error):
+                completion(.failure(error))
+            } }
+        task.resume()
+    }
 }
+
+extension OAuth2Service {
+    private func object(
+        for request: URLRequest,
+        completion: @escaping (Result<OAuthTokenResponseBody, Error>) -> Void) -> URLSessionTask {
+            
+            let decoder = JSONDecoder()
+            
+            return urlSession.data(for: request) { (result: Result<Data, Error>) in
+                let response = result.flatMap { data -> Result<OAuthTokenResponseBody, Error> in
+                    Result { try decoder.decode(OAuthTokenResponseBody.self, from: data) }
+                }
+                completion(response)
+            }
+        }
+    
+    // Passing path and method with base url to request token
+    private func authTokenRequest(code: String) -> URLRequest {
+        URLRequest.makeHTTPRequest(
+            path: "/oauth/token"
+            + "?client_id=\(AccessKey)"
+            + "&&client_secret=\(SecretKey)"
+            + "&&redirect_uri=\(RedirectURI)"
+            + "&&code=\(code)"
+            + "&&grant_type=authorization_code",
+            httpMethod: "POST",
+            baseURL: URL(string: "https://unsplash.com")!
+        )
+    }
+}
+
+// MARK: - HTTP Request
+
+extension URLRequest {
+    static func makeHTTPRequest(path: String, httpMethod: String, baseURL: URL = DefaultBaseUrl) -> URLRequest {
+        var request = URLRequest(url: URL(string: path, relativeTo: baseURL)!) // Static for override
+        request.httpMethod = httpMethod
+        return request
+    }
+}
+
+// MARK: - Network Connection
+
+enum NetworkError: Error {
+    case httpStatusCode(Int)
+    case urlRequestError(Error)
+    case urlSessionError
+}
+
+extension URLSession {
+    func data(for request: URLRequest,completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionTask {
+        
+        let fulfillCompletion: (Result<Data, Error>) -> Void = { result in
+            DispatchQueue.main.async {
+                completion(result)
+            }
+        }
+        
+        // If data, response, statusCode are defined and the code is in the range from 200 to 299, then call the closure with (.success(data)) result.
+        let task = dataTask(with: request, completionHandler: { data, response, error in
+            if let data = data,
+               let response = response,
+               let statusCode = (response as? HTTPURLResponse)?.statusCode {
+                
+                if 200 ..< 300 ~= statusCode {
+                    fulfillCompletion(.success(data))
+                } else {
+                    fulfillCompletion(.failure(NetworkError.httpStatusCode(statusCode)))
+                }
+            } else if let error = error {
+                fulfillCompletion(.failure(NetworkError.urlRequestError(error)))
+            } else {
+                fulfillCompletion(.failure(NetworkError.urlSessionError))
+            }
+        })
+        task.resume()
+        return task
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

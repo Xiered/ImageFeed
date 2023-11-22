@@ -13,7 +13,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="4KU-2K-r1W">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarViewController" id="jO1-8R-LE0" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="jO1-8R-LE0" customClass="TabBarController" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="goW-er-4eQ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -356,13 +356,15 @@
                             <constraint firstItem="eLX-D6-q1D" firstAttribute="centerX" secondItem="tEZ-13-h0C" secondAttribute="centerX" id="kaO-iv-KUo"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Unsplash" id="Wjc-Gp-7UJ"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="tJ6-b4-OVz" kind="presentation" identifier="ShowAuthenticationScreen" modalPresentationStyle="fullScreen" id="I8y-o0-XzE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ml-ka-yjL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-997" y="903"/>
+            <point key="canvasLocation" x="-984" y="707"/>
         </scene>
     </scenes>
     <resources>
