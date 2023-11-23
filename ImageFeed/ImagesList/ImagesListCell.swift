@@ -1,10 +1,3 @@
-//
-//  ImagesListCell.swift
-//  ImageFeed
-//
-//  Created by Дмитрий Герасимов on 16.10.2023.
-//
-
 import Foundation
 import UIKit
 
@@ -15,5 +8,4 @@ final class ImagesListCell: UITableViewCell {
     @IBOutlet var cellImage: UIImageView!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var dateLabel: UILabel!
-    
 }
