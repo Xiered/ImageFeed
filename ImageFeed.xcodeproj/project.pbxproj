@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C41305922B16515C007FA5D6 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41305912B16515C007FA5D6 /* UIBlockingProgressHUD.swift */; };
 		C41844BB2AE706A900068ED2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41844BA2AE706A900068ED2 /* ProfileViewController.swift */; };
 		C419A8462AF78BF700F3AA8E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C419A8452AF78BF700F3AA8E /* Constants.swift */; };
 		C45D7FF62ADD43D000606801 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D7FF52ADD43D000606801 /* ImagesListCell.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C41305912B16515C007FA5D6 /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		C41844BA2AE706A900068ED2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C419A8452AF78BF700F3AA8E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C45D7FF52ADD43D000606801 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				C4BE61892AF93F390013DAE6 /* Auth */,
 				C4BD3AF22ADC53C8008E4335 /* Resources */,
 				C419A8452AF78BF700F3AA8E /* Constants.swift */,
+				C41305912B16515C007FA5D6 /* UIBlockingProgressHUD.swift */,
 				C47E9B202AD11B730072D003 /* AppDelegate.swift */,
 				C47E9B222AD11B730072D003 /* SceneDelegate.swift */,
 				C47E9B262AD11B730072D003 /* Main.storyboard */,
@@ -273,6 +276,7 @@
 				C4732B872B063DA800EA1161 /* OAuth2TokenStorage .swift in Sources */,
 				C4BE618D2AF9550C0013DAE6 /* WebViewViewController.swift in Sources */,
 				C47E9B232AD11B730072D003 /* SceneDelegate.swift in Sources */,
+				C41305922B16515C007FA5D6 /* UIBlockingProgressHUD.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
