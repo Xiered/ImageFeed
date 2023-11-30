@@ -1,6 +1,8 @@
 import UIKit
 
 final class ProfileService {
+    static let shared = ProfileService()
+    
     struct ProfileResult: Codable { // Structure for Unsplash answer decoding
         var userName: String
         var firstName: String

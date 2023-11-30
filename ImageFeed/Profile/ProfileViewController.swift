@@ -1,7 +1,7 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
-    private var profileService = ProfileService() // TODO with fetchProfile method
+    private let profileService = ProfileService.shared // TODO with fetchProfile method
     
     override func viewDidLoad() {
         super.viewDidLoad()
