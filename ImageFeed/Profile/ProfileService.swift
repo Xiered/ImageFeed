@@ -3,24 +3,64 @@ import UIKit
 final class ProfileService {
     static let shared = ProfileService()
     
-    struct ProfileResult: Codable { // Structure for Unsplash answer decoding
-        var userName: String
-        var firstName: String
-        var lastName: String
-        var bio: String
-    }
+    private(set) var profile: Profile?
     
-    struct Profile: Codable {
-        var username: String
-        var name: String
-        var loginName: String
-        var bio: String
-    }
+    private var fetchTask: URLSessionTask?
+    private var urlSession = URLSession.shared
     
     func fetchProfile(token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
+        
+        fetchTask?.cancel()
+        
         guard let url = URL(string: "https://api.unsplash.com/me") else { return }
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        fetchTask = urlSession.objectTask(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
+            switch result {
+            case .success(let profileResult):
+                let profile = Profile(userName: profileResult.userName,
+                                      name: "\(profileResult.firstName) \(profileResult.lastName)",
+                                      loginName: "@\(profileResult.userName)",
+                                      bio: profileResult.bio)
+                self?.profile = profile
+                completion(.success(profile))
+            case .failure(_):
+                completion(.failure("ProfileService Error" as! Error))
+            }
+        }
+        fetchTask?.resume()
     }
 }
+
+struct ProfileResult: Codable { // Structure for Unsplash answer decoding
+    var userName: String
+    var firstName: String
+    var lastName: String
+    var bio: String
+    
+    enum CodingKeys: String, CodingKey {
+        case userName = "username"
+        case firstName = "firct_name"
+        case lastName = "last_name"
+        case bio = "bio"
+    }
+}
+
+struct Profile: Codable {
+    var userName: String
+    var name: String
+    var loginName: String
+    var bio: String
+}
+
+enum ProfileServiceError: Error {
+    case invalidRequest
+}
+
+/* extension ProfileService {
+    private func objectTask(for request: URLRequest, completion: @escaping (Result<ProfileResult,Error>)->Void)->URLSessionTask {
+       return URLSessionTask.data
+    }
+} */
