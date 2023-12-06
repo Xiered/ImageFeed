@@ -12,7 +12,7 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if let token = tokenStorage.token {
-            fetchProfile(token: token)
+           fetchProfile(token: token)
         } else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
         }
@@ -72,8 +72,8 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success (let token):
                 self.fetchProfile(token: token)
             case .failure:
-                print("Error to")
-                break
+               print("Error to")
+               break
             }
             UIBlockingProgressHUD.dismiss()
         }

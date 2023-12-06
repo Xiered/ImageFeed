@@ -27,7 +27,7 @@ final class ProfileService {
                 self?.profile = profile
                 completion(.success(profile))
             case .failure(_):
-                completion(.failure("ProfileService Error" as! Error))
+                completion(.failure(ProfileServiceError.invalidRequest))
             }
         }
         fetchTask?.resume()
@@ -59,8 +59,4 @@ enum ProfileServiceError: Error {
     case invalidRequest
 }
 
-/* extension ProfileService {
-    private func objectTask(for request: URLRequest, completion: @escaping (Result<ProfileResult,Error>)->Void)->URLSessionTask {
-       return URLSessionTask.data
-    }
-} */
+

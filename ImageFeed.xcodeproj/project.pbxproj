@@ -29,6 +29,7 @@
 		C4C18F9E2B0F3D0500000A4E /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C18F9D2B0F3D0500000A4E /* URLSession+Extension.swift */; };
 		C4C18FA12B0F3D9A00000A4E /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C18FA02B0F3D9A00000A4E /* NetworkError.swift */; };
 		C4C18FA42B0F930500000A4E /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = C4C18FA32B0F930500000A4E /* ProgressHUD */; };
+		C4EAFD592B200FED00EFBA0E /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EAFD582B200FED00EFBA0E /* ProfileImageService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		C4C18F9B2B0F3CF800000A4E /* URLRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extension.swift"; sourceTree = "<group>"; };
 		C4C18F9D2B0F3D0500000A4E /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		C4C18FA02B0F3D9A00000A4E /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		C4EAFD582B200FED00EFBA0E /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			children = (
 				C41844BA2AE706A900068ED2 /* ProfileViewController.swift */,
 				C47129682B167AD800C5C412 /* ProfileService.swift */,
+				C4EAFD582B200FED00EFBA0E /* ProfileImageService.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				C48702412B0A2F0F009FD676 /* SplashViewController.swift in Sources */,
 				C4BE618B2AF942920013DAE6 /* AuthViewController.swift in Sources */,
 				C419A8462AF78BF700F3AA8E /* Constants.swift in Sources */,
+				C4EAFD592B200FED00EFBA0E /* ProfileImageService.swift in Sources */,
 				C47129692B167AD800C5C412 /* ProfileService.swift in Sources */,
 				C4BFAC432AEF7FD5005E47BA /* SingleImageViewController.swift in Sources */,
 				C4C18F9E2B0F3D0500000A4E /* URLSession+Extension.swift in Sources */,
