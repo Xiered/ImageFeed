@@ -4,6 +4,8 @@ final class ProfileImageService {
     static let shared = ProfileImageService()
     private (set) var avatarURL: String?
     private let tokenStorage = OAuth2TokenStorage()
+    private let urlSession = URLSession.shared
+    private var task: URLSessionTask?
     
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         guard let token = tokenStorage.token else { return }
@@ -15,9 +17,23 @@ final class ProfileImageService {
         request.httpMethod = "GET"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
-        // dataTask
+        let dataTask = urlSession.objectTask(for: request) { [weak self] (result: Result<UserResult, Error>) in
+            switch result {
+            case .success(let userResult):
+                self?.avatarURL = userResult.profileImage.small
+                if let avatarURL = self?.avatarURL {
+                    completion(.success(userResult.profileImage.small))
+                } else {
+                    completion(.failure(ProfileServiceError.invalidRequest))
+                }
+                self?.task = nil
+            case .failure(_):
+                    completion(.failure(ProfileServiceError.invalidDecoding))
+            }
+        }
+        task = dataTask
+        task?.resume()
     }
-    
 }
 
 struct UserResult: Codable {

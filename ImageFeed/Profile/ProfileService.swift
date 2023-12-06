@@ -57,6 +57,8 @@ struct Profile: Codable {
 
 enum ProfileServiceError: Error {
     case invalidRequest
+    case invalidData
+    case invalidDecoding
 }
 
 
