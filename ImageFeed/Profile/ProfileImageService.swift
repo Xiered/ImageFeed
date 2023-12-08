@@ -6,6 +6,7 @@ final class ProfileImageService {
     private let tokenStorage = OAuth2TokenStorage()
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
+    static let DidChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         guard let token = tokenStorage.token else { return }
@@ -23,6 +24,10 @@ final class ProfileImageService {
                 self?.avatarURL = userResult.profileImage.small
                 if let avatarURL = self?.avatarURL {
                     completion(.success(userResult.profileImage.small))
+                    NotificationCenter.default
+                        .post(name: ProfileImageService.DidChangeNotification,
+                              object: self,
+                              userInfo: ["URL": avatarURL])
                 } else {
                     completion(.failure(ProfileServiceError.invalidRequest))
                 }
