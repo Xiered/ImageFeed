@@ -1,7 +1,8 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
-    private let profileService = ProfileService.shared // TODO with fetchProfile method
+    private let profileService = ProfileService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,29 +51,44 @@ final class ProfileViewController: UIViewController {
             avatarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
                                                 constant: 16),
             avatarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                                constant: 40),
+                                            constant: 40),
             
             logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                                                constant: -16),
+                                                   constant: -16),
             logoutButton.centerYAnchor.constraint(equalTo: avatarView.centerYAnchor),
             
             nameLabel.topAnchor.constraint(equalTo: avatarView.bottomAnchor,
-                                                constant: 8),
+                                           constant: 8),
             nameLabel.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor),
             
             loginLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor,
-                                                constant: 8),
+                                            constant: 8),
             loginLabel.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor),
             
             descriptionLabel.topAnchor.constraint(equalTo: loginLabel.bottomAnchor,
-                                                constant: 8),
+                                                  constant: 8),
             descriptionLabel.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor),
             
         ])
+        
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(forName: ProfileImageService.DidChangeNotification,
+                         object: nil,
+                         queue: .main)
+        { [weak  self] _ in
+            guard let self = self else { return }
+            self.updateAvatar()
+        }
+        updateAvatar()
     }
     
-    @objc
-    private func logout(_ sender: Any) {
-        
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let url = URL(string: profileImageURL)
+        else { return }
+        // TODO update avatar via Kingfisher
     }
 }
+
+
