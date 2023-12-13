@@ -89,6 +89,11 @@ final class ProfileViewController: UIViewController {
         else { return }
         // TODO update avatar via Kingfisher
     }
+    
+    @objc
+    private func logout() {
+        
+    }
 }
 
 
