@@ -8,9 +8,7 @@ final class ProfileService {
     private var fetchTask: URLSessionTask?
     private var urlSession = URLSession.shared
     
-    func fetchProfile(token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
-        assert(Thread.isMainThread)
-        
+    func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         fetchTask?.cancel()
         
         guard let url = URL(string: "https://api.unsplash.com/me") else { return }

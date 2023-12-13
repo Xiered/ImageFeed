@@ -73,8 +73,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self = self else { return }
             switch result {
             case .success (let token):
-                switchToTabBarController()
-               // self.fetchProfile(token: token)
+                self.fetchProfile(token: token)
             case .failure:
                SplashViewAlertViewController()
                break
@@ -84,9 +83,8 @@ extension SplashViewController: AuthViewControllerDelegate {
     }
     
     private func fetchProfile(token: String) {
-        profileService.fetchProfile(token: token) { [weak self] result in
+        profileService.fetchProfile(token) { [weak self] result in
             DispatchQueue.main.async{
-                
                 guard let self = self else { return }
                 switch result {
                 case .success(let result):

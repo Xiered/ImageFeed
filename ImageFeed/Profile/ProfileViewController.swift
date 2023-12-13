@@ -1,8 +1,10 @@
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
+    private var avatarImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +89,8 @@ final class ProfileViewController: UIViewController {
             let profileImageURL = ProfileImageService.shared.avatarURL,
             let url = URL(string: profileImageURL)
         else { return }
-        // TODO update avatar via Kingfisher
+        let placeholder = UIImage(named: "profile_view")
+        avatarImage.kf.setImage(with: url, placeholder: placeholder)
     }
     
     @objc
