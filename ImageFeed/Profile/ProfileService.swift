@@ -6,12 +6,12 @@ final class ProfileService {
     private(set) var profile: Profile?
     
     private var fetchTask: URLSessionTask?
-    private var urlSession = URLSession.shared
+    private let urlSession = URLSession.shared
     
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         fetchTask?.cancel()
         
-        guard let url = URL(string: "https://api.unsplash.com/me") else { return }
+        let url = URL(string: "https://api.unsplash.com/me")! 
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
@@ -36,7 +36,7 @@ struct ProfileResult: Codable { // Structure for Unsplash answer decoding
     var userName: String
     var firstName: String
     var lastName: String
-    var bio: String
+    var bio: String?
     
     enum CodingKeys: String, CodingKey {
         case userName = "username"
@@ -50,7 +50,7 @@ struct Profile: Codable {
     var userName: String
     var name: String
     var loginName: String
-    var bio: String
+    var bio: String?
 }
 
 enum ProfileServiceError: Error {
