@@ -44,7 +44,7 @@ extension URLSession {
                         let decodedModel = try jsonDecoder.decode(T.self, from: data)
                         fulfillCompletion(.success(decodedModel))
                     } catch {
-                        fulfillCompletion(.failure(NetworkError.urlSessionError))
+                        fulfillCompletion(.failure(NetworkError.decodingError))
                     }
                 } else {
                     fulfillCompletion(.failure(NetworkError.httpStatusCode(response.statusCode)))
