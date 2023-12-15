@@ -18,71 +18,7 @@ final class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*
-        let avatarView = UIImageView()
-        let avatarImage = UIImage(named: "profile_view")
-        avatarView.image = avatarImage
-        avatarView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(avatarView)
-        
-        let logoutButtonImage = UIImage(systemName: "ipad.and.arrow.forward")
-        let logoutButton = UIButton.systemButton(
-            with: logoutButtonImage!,
-            target: self,
-            action: #selector(logout))
-        
-        logoutButton.tintColor = UIColor(named: "YP Red")
-        logoutButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(logoutButton)
-        
-        let nameLabel = UILabel()
-        nameLabel.text = "Екатерина Новикова"
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 23)
-        nameLabel.textColor = UIColor(named: "YP White")
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(nameLabel)
-        
-        let loginLabel = UILabel()
-        loginLabel.text = "@ekaterina_nov"
-        loginLabel.font = UIFont.systemFont(ofSize: 13)
-        loginLabel.textColor = UIColor(named: "YP Gray")
-        loginLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(loginLabel)
-        
-        let descriptionLabel = UILabel()
-        descriptionLabel.text = "Hello, World!"
-        descriptionLabel.font = UIFont.systemFont(ofSize: 13)
-        descriptionLabel.textColor = UIColor(named: "YP White")
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(descriptionLabel)
-        
-        NSLayoutConstraint.activate([
-            
-            avatarView.heightAnchor.constraint(equalToConstant: 70),
-            avatarView.widthAnchor.constraint(equalToConstant: 70),
-            avatarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                                                constant: 16),
-            avatarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                            constant: 40),
-            
-            logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                                                   constant: -16),
-            logoutButton.centerYAnchor.constraint(equalTo: avatarView.centerYAnchor),
-            
-            nameLabel.topAnchor.constraint(equalTo: avatarView.bottomAnchor,
-                                           constant: 8),
-            nameLabel.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor),
-            
-            loginLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor,
-                                            constant: 8),
-            loginLabel.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor),
-            
-            descriptionLabel.topAnchor.constraint(equalTo: loginLabel.bottomAnchor,
-                                                  constant: 8),
-            descriptionLabel.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor),
-            
-        ])
-        */
+        unionElementsForUI()
     }
     
     // MARK: - Methods
@@ -160,7 +96,7 @@ final class ProfileViewController: UIViewController {
     }
     // Options for Profile back button
     private func makingLogoutButton(safeArea: UILayoutGuide) {
-        logoutButton = UIButton.systemButton(with: UIImage(named: "ipad.and.arrow.forward") ?? UIImage(),
+        logoutButton = UIButton.systemButton(with: UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage(),
                                              target: self,
                                              action: nil)
         view.addSubview(logoutButton)
@@ -170,21 +106,40 @@ final class ProfileViewController: UIViewController {
     
     // Merging methods for UI (View-elements, constraints, update-functions)
     private func unionElementsForUI() {
+        makingNameLabel(safeArea: view.safeAreaLayoutGuide)
+        makingLoginLabel(safeArea: view.safeAreaLayoutGuide)
+        makingAvatarImage(safeArea: view.safeAreaLayoutGuide)
+        makingDescriptionLabel(safeArea: view.safeAreaLayoutGuide)
+        makingLogoutButton(safeArea: view.safeAreaLayoutGuide)
+        constraintsLayout()
+        updateAvatar()
+        updateProfileDetails(profile: profileService.profile)
+        subscriptionForNotification()
         
+        view.backgroundColor = UIColor(named: "YP Black")
     }
-    
     // Constraints for View elements
     private func constraintsLayout() {
         NSLayoutConstraint.activate([
-            
-        ])
+            // Avatar constraints settings
+            avatarImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            avatarImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            avatarImage.widthAnchor.constraint(equalToConstant: 70),
+            avatarImage.heightAnchor.constraint(equalToConstant: 70),
+            // Name constraints settings
+            nameLabel.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 20),
+            nameLabel.leadingAnchor.constraint(equalTo: avatarImage.leadingAnchor),
+            // Login constraints settings
+            loginLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+            loginLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            // Description constraints settings
+            descriptionLabel.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 8),
+            descriptionLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            // Back button constraints settings
+            logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            logoutButton.centerYAnchor.constraint(equalTo: avatarImage.centerYAnchor)
+            ])
     }
-    
-    /* @objc
-    private func logout() {
-        
-    }
-    */
 }
 
 
