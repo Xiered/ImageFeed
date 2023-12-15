@@ -82,6 +82,7 @@ final class ProfileViewController: UIViewController {
             
         ])
         
+        // Subscriptions for notification
         profileImageServiceObserver = NotificationCenter.default
             .addObserver(forName: ProfileImageService.DidChangeNotification,
                          object: nil,
@@ -115,6 +116,31 @@ final class ProfileViewController: UIViewController {
             loginLabel.text = "Error with login"
             descriptionLabel.text = "Error with description"
         }
+    }
+    
+    private func makingAvatarImage() {
+        
+    }
+    
+    private func makingNameLabel() {
+        
+    }
+    
+    private func makingLoginLabel() {
+        
+    }
+    
+    private func makingDescriptionLabel() {
+        
+    }
+    
+    private func makingLogoutButton() {
+        
+    }
+    
+    // Merging methods for UI
+    private func unionElementsForUI() {
+        
     }
     
     @objc
