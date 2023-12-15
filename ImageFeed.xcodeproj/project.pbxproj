@@ -17,6 +17,7 @@
 		C4732B872B063DA800EA1161 /* OAuth2TokenStorage .swift in Sources */ = {isa = PBXBuildFile; fileRef = C4732B862B063DA800EA1161 /* OAuth2TokenStorage .swift */; };
 		C47920302B299DE700B2A60B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C479202F2B299DE700B2A60B /* Kingfisher */; };
 		C47920332B29A0A400B2A60B /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = C47920322B29A0A400B2A60B /* SwiftKeychainWrapper */; };
+		C47920352B2CA91F00B2A60B /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47920342B2CA91F00B2A60B /* TabBarController.swift */; };
 		C47E9B212AD11B730072D003 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47E9B202AD11B730072D003 /* AppDelegate.swift */; };
 		C47E9B232AD11B730072D003 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47E9B222AD11B730072D003 /* SceneDelegate.swift */; };
 		C47E9B252AD11B730072D003 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47E9B242AD11B730072D003 /* ImagesListViewController.swift */; };
@@ -43,6 +44,7 @@
 		C4732B822B063B3000EA1161 /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
 		C4732B842B063C0C00EA1161 /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		C4732B862B063DA800EA1161 /* OAuth2TokenStorage .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OAuth2TokenStorage .swift"; sourceTree = "<group>"; };
+		C47920342B2CA91F00B2A60B /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C47E9B1D2AD11B730072D003 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C47E9B202AD11B730072D003 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C47E9B222AD11B730072D003 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				C41305912B16515C007FA5D6 /* UIBlockingProgressHUD.swift */,
 				C47E9B202AD11B730072D003 /* AppDelegate.swift */,
 				C47E9B222AD11B730072D003 /* SceneDelegate.swift */,
+				C47920342B2CA91F00B2A60B /* TabBarController.swift */,
 				C47E9B262AD11B730072D003 /* Main.storyboard */,
 				C47E9B2B2AD11B750072D003 /* LaunchScreen.storyboard */,
 				C47E9B2E2AD11B750072D003 /* Info.plist */,
@@ -287,6 +290,7 @@
 				C419A8462AF78BF700F3AA8E /* Constants.swift in Sources */,
 				C4EAFD592B200FED00EFBA0E /* ProfileImageService.swift in Sources */,
 				C47129692B167AD800C5C412 /* ProfileService.swift in Sources */,
+				C47920352B2CA91F00B2A60B /* TabBarController.swift in Sources */,
 				C4BFAC432AEF7FD5005E47BA /* SingleImageViewController.swift in Sources */,
 				C4C18F9E2B0F3D0500000A4E /* URLSession+Extension.swift in Sources */,
 				C4732B872B063DA800EA1161 /* OAuth2TokenStorage .swift in Sources */,
