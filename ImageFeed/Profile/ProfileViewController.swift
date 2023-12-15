@@ -12,12 +12,13 @@ final class ProfileViewController: UIViewController {
     private var loginLabel: UILabel!
     private var avatarImage: UIImageView!
     private var descriptionLabel: UILabel!
+    private var logoutButton: UIButton!
     
     // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        /*
         let avatarView = UIImageView()
         let avatarImage = UIImage(named: "profile_view")
         avatarView.image = avatarImage
@@ -81,8 +82,12 @@ final class ProfileViewController: UIViewController {
             descriptionLabel.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor),
             
         ])
-        
-        // Subscriptions for notification
+        */
+    }
+    
+    // MARK: - Methods
+    // Subscription for avatar updating
+    private func subscriptionForNotification() {
         profileImageServiceObserver = NotificationCenter.default
             .addObserver(forName: ProfileImageService.DidChangeNotification,
                          object: nil,
@@ -94,8 +99,6 @@ final class ProfileViewController: UIViewController {
         updateAvatar()
         updateProfileDetails(profile: profileService.profile)
     }
-    
-    // MARK: - Methods
     
     private func updateAvatar() {
         guard
@@ -117,36 +120,71 @@ final class ProfileViewController: UIViewController {
             descriptionLabel.text = "Error with description"
         }
     }
-    
-    private func makingAvatarImage() {
-        
+    // Options for Profile avatar
+    private func makingAvatarImage(safeArea: UILayoutGuide) {
+        avatarImage = UIImageView()
+        avatarImage.image = UIImage(named: "profile_view")
+        avatarImage.translatesAutoresizingMaskIntoConstraints = false
+        avatarImage.contentMode = .scaleAspectFill
+        avatarImage.clipsToBounds = true
+        avatarImage.layer.masksToBounds = true
+        avatarImage.layer.cornerRadius = 35
+        view.addSubview(avatarImage)
+    }
+    // Options for Profile name
+    private func makingNameLabel(safeArea: UILayoutGuide) {
+        nameLabel = UILabel()
+        nameLabel.text = "Екатерина Новикова"
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.textColor = UIColor(named: "YP White")
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 23)
+        view.addSubview(nameLabel)
+    }
+    // Options for Profile login
+    private func makingLoginLabel(safeArea: UILayoutGuide) {
+        loginLabel = UILabel()
+        loginLabel.text = "@nov_ekaterina"
+        loginLabel.translatesAutoresizingMaskIntoConstraints = false
+        loginLabel.textColor = UIColor(named: "YP Gray")
+        loginLabel.font = UIFont.systemFont(ofSize: 13)
+        view.addSubview(loginLabel)
+    }
+    // Options for Profile description
+    private func makingDescriptionLabel(safeArea: UILayoutGuide) {
+        descriptionLabel = UILabel()
+        descriptionLabel.text = "Hello, World!"
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.textColor = UIColor(named: "YP White")
+        descriptionLabel.font = UIFont.systemFont(ofSize: 13)
+        view.addSubview(descriptionLabel)
+    }
+    // Options for Profile back button
+    private func makingLogoutButton(safeArea: UILayoutGuide) {
+        logoutButton = UIButton.systemButton(with: UIImage(named: "ipad.and.arrow.forward") ?? UIImage(),
+                                             target: self,
+                                             action: nil)
+        view.addSubview(logoutButton)
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.tintColor = UIColor(named: "YP Red")
     }
     
-    private func makingNameLabel() {
-        
-    }
-    
-    private func makingLoginLabel() {
-        
-    }
-    
-    private func makingDescriptionLabel() {
-        
-    }
-    
-    private func makingLogoutButton() {
-        
-    }
-    
-    // Merging methods for UI
+    // Merging methods for UI (View-elements, constraints, update-functions)
     private func unionElementsForUI() {
         
     }
     
-    @objc
+    // Constraints for View elements
+    private func constraintsLayout() {
+        NSLayoutConstraint.activate([
+            
+        ])
+    }
+    
+    /* @objc
     private func logout() {
         
     }
+    */
 }
 
 
