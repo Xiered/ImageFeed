@@ -2,9 +2,7 @@ import UIKit
 
 final class ProfileService {
     static let shared = ProfileService()
-    
     private(set) var profile: Profile?
-    
     private var fetchTask: URLSessionTask?
     private let urlSession = URLSession.shared
     
@@ -40,7 +38,7 @@ struct ProfileResult: Codable { // Structure for Unsplash answer decoding
     
     enum CodingKeys: String, CodingKey {
         case userName = "username"
-        case firstName = "firct_name"
+        case firstName = "first_name"
         case lastName = "last_name"
         case bio = "bio"
     }
