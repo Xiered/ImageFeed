@@ -2,10 +2,19 @@ import UIKit
 import Kingfisher
 
 final class ProfileViewController: UIViewController {
+    
+    // MARK: - Properties
+    
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
+    private let profileImageService = ProfileImageService.shared
+    private var nameLabel: UILabel!
+    private var loginLabel: UILabel!
     private var avatarImage: UIImageView!
+    private var descriptionLabel: UILabel!
     
+    // MARK: - Life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -82,15 +91,30 @@ final class ProfileViewController: UIViewController {
             self.updateAvatar()
         }
         updateAvatar()
+        updateProfileDetails(profile: profileService.profile)
     }
+    
+    // MARK: - Methods
     
     private func updateAvatar() {
         guard
-            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let profileImageURL = profileImageService.avatarURL,
             let url = URL(string: profileImageURL)
         else { return }
-        let placeholder = UIImage(named: "profile_view")
+        let placeholder = UIImage(systemName: "profile_view")
         avatarImage.kf.setImage(with: url, placeholder: placeholder)
+    }
+    
+    private func updateProfileDetails(profile: Profile?) {
+        if let profile = profile {
+            nameLabel.text = profile.name
+            loginLabel.text = profile.loginName
+            descriptionLabel.text = profile.bio
+        } else {
+            nameLabel.text = "Errot with name"
+            loginLabel.text = "Error with login"
+            descriptionLabel.text = "Error with description"
+        }
     }
     
     @objc

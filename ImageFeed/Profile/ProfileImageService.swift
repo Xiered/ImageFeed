@@ -27,7 +27,7 @@ final class ProfileImageService {
                     NotificationCenter.default
                         .post(name: ProfileImageService.DidChangeNotification,
                               object: self,
-                              userInfo: ["URL": avatarURL])
+                              userInfo: ["URL": userResult.profileImage.small])
                 } else {
                     completion(.failure(ProfileServiceError.invalidRequest))
                 }
