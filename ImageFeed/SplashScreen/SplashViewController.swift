@@ -8,14 +8,16 @@ final class SplashViewController: UIViewController {
     private let oauth2Service = OAuth2Service()
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+    private var splashScreenLogo: UIImageView!
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        logoSplashScreen(safeArea: view.safeAreaLayoutGuide)
         
         if let token = tokenStorage.token {
            fetchProfile(token: token)
         } else {
-            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
+            delegateAuthViewController()
         }
     }
     
@@ -34,28 +36,9 @@ final class SplashViewController: UIViewController {
             SplashViewAlertViewController()
             return
         }
-        
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarController
-    }
-}
-
-extension SplashViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-            
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let viewController = navigationController.viewControllers[0] as? AuthViewController
-            else { fatalError("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)") }
-            
-            // Set the controller delegate to SplashViewController
-            viewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
     }
 }
 
@@ -107,5 +90,26 @@ extension SplashViewController: AuthViewControllerDelegate {
                                             style: .default)
         
         alert.addAction(actionWithAlert)
+    }
+    
+    private func logoSplashScreen(safeArea: UILayoutGuide) {
+        view.backgroundColor = UIColor(named: "YP Black")
+        splashScreenLogo = UIImageView()
+        splashScreenLogo.image = UIImage(named: "splash_screen_logo")
+        splashScreenLogo.contentMode = .scaleToFill
+        splashScreenLogo.clipsToBounds = true
+        splashScreenLogo.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(splashScreenLogo)
+        NSLayoutConstraint.activate([
+            splashScreenLogo.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            splashScreenLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+    
+    private func delegateAuthViewController() {
+        let authViewController = AuthViewController()
+        authViewController.delegate = self
+        authViewController.modalPresentationStyle = .fullScreen
+        present(authViewController, animated: true, completion: nil)
     }
 }
