@@ -4,9 +4,15 @@ final class ImagesListService {
     private var lastLoadedPage: Int?
     private (set) var photos: [Photo] = []
     static let DidChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
+    private let urlSession = URLSession.shared
+    private var task: URLSessionTask?
+    
+    private init() { }
+    
+    // MARK: - Methods
     
     func fetchPhotosNextPage() {
-        
+        let nextPage = lastLoadedPage == nil ? 1 : lastLoadedPage! + 1 // Answer on - "what page to load?"
     }
     
 }
