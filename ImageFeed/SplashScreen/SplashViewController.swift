@@ -33,7 +33,7 @@ final class SplashViewController: UIViewController {
     func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else {
             fatalError("Invalid Configuration")
-            SplashViewAlertViewController()
+            showSplashViewAlert()
             return
         }
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
@@ -58,7 +58,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success (let token):
                 self.fetchProfile(token: token)
             case .failure:
-               SplashViewAlertViewController()
+               showSplashViewAlert()
                break
             }
             UIBlockingProgressHUD.dismiss()
@@ -74,14 +74,14 @@ extension SplashViewController: AuthViewControllerDelegate {
                     self.profileImageService.fetchProfileImageURL(username: result.userName) { _ in }
                     self.switchToTabBarController()
                 case .failure:
-                    self.SplashViewAlertViewController()
+                    self.showSplashViewAlert()
                     break
                 }
             }
         }
     }
     
-    private func SplashViewAlertViewController() {
+    private func showSplashViewAlert() {
         let alert = UIAlertController(title: "Что-то пошло не так",
                                       message: "Не удалось войти в систему",
                                       preferredStyle: .alert)

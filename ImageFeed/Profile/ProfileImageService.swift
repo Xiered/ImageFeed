@@ -8,6 +8,8 @@ final class ProfileImageService {
     private var task: URLSessionTask?
     static let DidChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
+    private init() { }
+    
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         guard let token = tokenStorage.token else { return }
         
