@@ -1,25 +1,20 @@
-import Foundation
+import UIKit
+import SwiftKeychainWrapper
 
-enum OAuthStorageKeys: String {
-    case OAuthStorageKey
-}
-
-protocol OAuthStorageProtocol {
-    var token: String? { get set }
-}
-
-final class OAuth2TokenStorage: OAuthStorageProtocol {
-    
-    private let userDefaults = UserDefaults.standard
-    init() {}
+class OAuth2TokenStorage {
+    private let keychainWrapper = KeychainWrapper.standard
     
     var token: String? {
-        
         get {
-            userDefaults.string(forKey: OAuthStorageKeys.OAuthStorageKey.rawValue)
+            return keychainWrapper.string(forKey: "token")
         }
         set {
-            userDefaults.set(newValue, forKey: OAuthStorageKeys.OAuthStorageKey.rawValue)
+            if let newToken = newValue {
+                keychainWrapper.set(newToken, forKey: "token")
+            } else {
+                keychainWrapper.removeObject(forKey: "token")
+            }
         }
     }
 }
+
