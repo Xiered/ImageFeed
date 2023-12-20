@@ -7,6 +7,7 @@ final class ImagesListViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
 
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
+    private var photos: [Photo] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,7 @@ final class ImagesListViewController: UIViewController {
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return photosName.count
+        return photos.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
