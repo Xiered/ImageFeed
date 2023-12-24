@@ -1,25 +1,29 @@
 import UIKit
+import Kingfisher
 
 final class ImagesListViewController: UIViewController {
-    
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     
     @IBOutlet private var tableView: UITableView!
 
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
     private var photos: [Photo] = []
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-    }
-
+    private let imagesListService = ImagesListService.shared
+    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .none
         return formatter
     }()
+    // MARK: - Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: ImagesListService.DidChangeNotification, object: nil)
+        imagesListService.fetchPhotosNextPage()
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -29,17 +33,41 @@ final class ImagesListViewController: UIViewController {
         if segue.identifier == ShowSingleImageSegueIdentifier {
             let viewController = segue.destination as! SingleImageViewController
             let indexPath = sender as! IndexPath
-            let imageName = photosName[indexPath.row]
-            let image = UIImage(named: "\(imageName)_full_size") ?? UIImage(named: imageName)
-            viewController.image = image
+            viewController.fullImageURL = photos[indexPath.row].fullImageURL
         } else {
             super.prepare(for: segue, sender: sender)
         }
     }
     
+    @objc func updateTableView() {
+        let previousCount = photos.count
+        let newCount = imagesListService.photos.count
+        photos = imagesListService.photos
+        
+        if previousCount != newCount {
+            tableView.performBatchUpdates({
+                let indexPaths = (previousCount..<newCount).map { i in
+                    IndexPath(row: i, section: 0)
+                }
+                tableView.insertRows(at: indexPaths, with: .automatic)
+            }, completion: nil)
+        }
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
+    ) {
+        if indexPath.row + 1 == photos.count {
+            imagesListService.fetchPhotosNextPage()
+        } else {
+            return
+        }
+    }
+    
 }
-
-
+// MARK: - Extensions
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,15 +75,30 @@ extension ImagesListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
-
-        guard let imageListCell = cell as? ImagesListCell else {
-            return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ImagesListCell", for: indexPath) as? ImagesListCell else { fatalError("Cannot extract cell") }
+        cell.delegate = self
+        let photo = photos[indexPath.row]
+        if let url = URL(string: photo.thumbImageURL) { // Kingfisher for loading image via URL
+            cell.cellImage.kf.indicatorType = .activity
+            cell.cellImage.kf.setImage(with: url,
+                                       placeholder: UIImage(named: "placeholder_cell"),
+                                       options: []) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(_):
+                    if let created = photo.createdAt {
+                        cell.dateLabel.text = self.dateFormatter.string(from: created)
+                    } else {
+                        cell.dateLabel.text = ""
+                    }
+                    cell.setIsLiked(photo.isLiked)
+                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                case .failure(let error):
+                    print(error)
+                }
+            }
         }
-
-        configCell(for: imageListCell, with: indexPath)
-
-        return imageListCell
+        return cell
     }
 }
 
@@ -89,5 +132,44 @@ extension ImagesListViewController: UITableViewDelegate {
         let scale = imageViewWidth / imageWidth
         let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
         return cellHeight
+    }
+}
+
+extension ImagesListViewController: ImagesListCellDelegate {
+    func imageListCellDidTapLike(_ cell: ImagesListCell) { // For like button
+        
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let photo = photos[indexPath.row]
+        let isLiked = !photo.isLiked
+        UIBlockingProgressHUD.show()
+        
+        imagesListService.changeLike(photoId: photo.id, isLike: isLiked) { [weak self] result in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    cell.setIsLiked(isLiked)
+                    if let index = self.photos.firstIndex(where: { $0.id == photo.id }) {
+                        let currentPhoto = self.photos[index]
+                        let updatedPhoto = Photo(
+                            id: currentPhoto.id,
+                            size: currentPhoto.size,
+                            createdAt: currentPhoto.createdAt,
+                            welcomeDescription: currentPhoto.welcomeDescription,
+                            thumbImageURL: currentPhoto.thumbImageURL,
+                            largeImageURL: currentPhoto.largeImageURL,
+                            fullImageURL: currentPhoto.fullImageURL,
+                            isLiked: !currentPhoto.isLiked
+                        )
+                        self.photos.remove(at: index)
+                        self.photos.insert(updatedPhoto, at: index)
+                    }
+                case .failure(let error):
+                    print("Error to changing like: \(error)")
+                }
+                UIBlockingProgressHUD.dismiss()
+            }
+        }
     }
 }

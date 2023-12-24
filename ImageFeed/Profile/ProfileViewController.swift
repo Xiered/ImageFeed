@@ -1,5 +1,8 @@
 import UIKit
 import Kingfisher
+import WebKit
+import ProgressHUD
+import SwiftKeychainWrapper
 
 final class ProfileViewController: UIViewController {
     
@@ -13,6 +16,7 @@ final class ProfileViewController: UIViewController {
     private var avatarImage: UIImageView!
     private var descriptionLabel: UILabel!
     private var logoutButton: UIButton!
+    private let tokenStorage = OAuth2TokenStorage()
     
     // MARK: - Life cycle
 
@@ -102,6 +106,7 @@ final class ProfileViewController: UIViewController {
         view.addSubview(logoutButton)
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.tintColor = UIColor(named: "YP Red")
+        logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
     }
     
     // Merging methods for UI (View-elements, constraints, update-functions)
@@ -140,6 +145,37 @@ final class ProfileViewController: UIViewController {
             logoutButton.centerYAnchor.constraint(equalTo: avatarImage.centerYAnchor)
             ])
     }
+    
+    @objc private func logoutButtonTapped() { // Alert for logout button action
+        let alert = UIAlertController(title: "Пока, Пока!", message: "Уверены, что хотите выйти?", preferredStyle: .alert)
+        let doingAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
+            guard let self = self else {return}
+            self.accountLogout()
+        }
+        let cancelAction = UIAlertAction(title: "Нет", style: .cancel, handler: nil)
+        alert.addAction(doingAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func accountLogout() {
+        tokenStorage.cleanToken()
+        UIBlockingProgressHUD.show()
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast) // Clearing Coockies
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+            }
+        }
+        let window = UIApplication.shared.windows.first
+        let splashVC = SplashViewController()
+        window?.rootViewController = splashVC
+        UIBlockingProgressHUD.dismiss()
+    }
 }
+
+
+
+
 
 

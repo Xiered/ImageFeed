@@ -16,5 +16,9 @@ class OAuth2TokenStorage {
             }
         }
     }
+    
+    func cleanToken() {
+        keychainWrapper.remove(forKey: "token")
+    }
 }
 
