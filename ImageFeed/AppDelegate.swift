@@ -7,10 +7,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { // Changings options in ProgressHUD
+        configuratingProgressHUD()
+        return true
+    }
+    
+    func configuratingProgressHUD() {
         ProgressHUD.animationType = .systemActivityIndicator
         ProgressHUD.colorHUD = .black
         ProgressHUD.colorAnimation = .lightGray
-        return true
     }
 
     // MARK: UISceneSession Lifecycle

@@ -11,7 +11,8 @@ final class ImagesListService {
     private let pagesCount = 10
     private var isFetching = false
     static let shared = ImagesListService()
-    
+    private let dateFormatter = ISO8601DateFormatter()
+
     private init() { }
     
     // MARK: - Methods
@@ -20,9 +21,9 @@ final class ImagesListService {
         guard !isFetching else { return }
         isFetching = true
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
             guard let self = self else { return }
-            UIBlockingProgressHUD.show()
+         // UIBlockingProgressHUD.show()
             guard let url = URL(string: "https://api.unsplash.com/photos?page=\(self.currentPage)&per_page=\(self.pagesCount)"),
                   let token = tokenStorage.token else {
                 self.isFetching = false
@@ -41,7 +42,7 @@ final class ImagesListService {
                         return Photo(
                             id: photoResult.id,
                             size: CGSize(width: photoResult.width, height: photoResult.height),
-                            createdAt: self.dateFromString(photoResult.createdAt),
+                            createdAt: self.dateFormatter.date(from: photoResult.createdAt),
                             welcomeDescription: photoResult.description,
                             thumbImageURL: photoResult.urls.thumb,
                             largeImageURL: photoResult.urls.regular,
@@ -64,11 +65,6 @@ final class ImagesListService {
             }
             task.resume()
         }
-    }
-    
-    private func dateFromString(_ dateString: String) -> Date? {
-        let dateFormatter = ISO8601DateFormatter()
-        return dateFormatter.date(from: dateString)
     }
     
     func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) { // Avoidance circuit
