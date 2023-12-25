@@ -70,6 +70,9 @@
                                                     <state key="normal" image="like_button_active">
                                                         <color key="titleColor" name="YP White"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="likeButtonClicked" destination="gVT-RO-qxI" eventType="touchUpInside" id="dK4-CI-g4L"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

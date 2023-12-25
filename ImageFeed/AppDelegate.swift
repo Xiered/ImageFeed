@@ -1,20 +1,20 @@
-//
-//  AppDelegate.swift
-//  ImageFeed
-//
-//  Created by Дмитрий Герасимов on 07.10.2023.
-//
-
 import UIKit
+import ProgressHUD
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { // Changings options in ProgressHUD
+        configuratingProgressHUD()
         return true
+    }
+    
+    func configuratingProgressHUD() {
+        ProgressHUD.animationType = .systemActivityIndicator
+        ProgressHUD.colorHUD = .black
+        ProgressHUD.colorAnimation = .lightGray
     }
 
     // MARK: UISceneSession Lifecycle
