@@ -19,18 +19,8 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
         super.viewDidLoad()
 
         webView.navigationDelegate = self
-
-        var urlComponents = URLComponents(string: unsplashAuthorizeURLString)!
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: accessKey),
-            URLQueryItem(name: "redirect_uri", value: redirectURI),
-            URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: accessScope)
-        ]
-        let url = urlComponents.url!
-
-        let request = URLRequest(url: url)
-        webView.load(request)
+        
+        presenter?.viewDidLoad()
         
         estimatedProgressObservation = webView.observe(
             \.estimatedProgress,
@@ -86,8 +76,14 @@ extension WebViewViewController: WKNavigationDelegate {
             return nil
         }
     }
+    
+    func load(request: URLRequest) {
+        webView.load(request)
+    }
 }
 
 public protocol WebViewViewControllerProtocol: AnyObject {
     var presenter: WebViewPresenterProtocol? { get set }
+    func load(request: URLRequest)
 }
+
