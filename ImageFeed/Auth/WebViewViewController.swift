@@ -27,7 +27,7 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
              options: [],
              changeHandler: { [weak self] _, _ in
                  guard let self = self else { return }
-                 self.updateProgress()})
+                 self.presenter?.didUpdateProgressValue(self.webView.estimatedProgress)})
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,9 +38,12 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
         super.viewDidDisappear(animated)
     }
     
-    private func updateProgress() {
-        progressView.progress = Float(webView.estimatedProgress)
-        progressView.isHidden = fabs(webView.estimatedProgress - 1.0 ) <= 0.0001
+    func setProgressValue(_ newValue: Float) {
+        progressView.progress = newValue
+    }
+    
+    func setProgressHidden(_ isHidden: Bool) {
+        progressView.isHidden = isHidden
     }
 
     
@@ -85,5 +88,7 @@ extension WebViewViewController: WKNavigationDelegate {
 public protocol WebViewViewControllerProtocol: AnyObject {
     var presenter: WebViewPresenterProtocol? { get set }
     func load(request: URLRequest)
+    func setProgressValue(_ newValue: Float)
+    func setProgressHidden(_ isHidden: Bool)
 }
 
