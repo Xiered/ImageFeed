@@ -107,6 +107,7 @@ final class ProfileViewController: UIViewController {
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.tintColor = UIColor(named: "YP Red")
         logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+        logoutButton.accessibilityIdentifier = "logout button"
     }
     
     // Merging methods for UI (View-elements, constraints, update-functions)
@@ -148,10 +149,12 @@ final class ProfileViewController: UIViewController {
     
     @objc private func logoutButtonTapped() { // Alert for logout button action
         let alert = UIAlertController(title: "Пока, Пока!", message: "Уверены, что хотите выйти?", preferredStyle: .alert)
+        alert.view.accessibilityIdentifier = "Пока_пока"
         let doingAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
             guard let self = self else {return}
             self.accountLogout()
         }
+        doingAction.accessibilityIdentifier = "doing_action"
         let cancelAction = UIAlertAction(title: "Нет", style: .cancel, handler: nil)
         alert.addAction(doingAction)
         alert.addAction(cancelAction)

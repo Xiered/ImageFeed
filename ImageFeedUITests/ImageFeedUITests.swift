@@ -9,8 +9,10 @@ import XCTest
 
 final class ImageFeedUITests: XCTestCase {
     private let app = XCUIApplication()
-    let email = ""
-    let password = ""
+    let email = "vnyantost@gmail.com"
+    let password = "0810Dtcs2002.."
+    let fullname = "Dmitriy Gerasimov"
+    let username = "@xieretty"
     
     override func setUpWithError() throws {
         continueAfterFailure = false
@@ -50,12 +52,12 @@ final class ImageFeedUITests: XCTestCase {
     
     func testFeed() throws {
         let tablesQuery = app.tables
-        sleep(3)
         
         let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
         cell.swipeUp()
+        sleep(3)
         
-        sleep(2)
+       
         
         let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
         cellToLike.buttons["like button"].tap()
@@ -76,6 +78,16 @@ final class ImageFeedUITests: XCTestCase {
     }
     
     func testProfile() throws {
+        sleep(3)
+        app.tabBars.buttons.element(boundBy: 1).tap()
         
+        XCTAssertTrue(app.staticTexts[fullname].exists)
+        XCTAssertTrue(app.staticTexts[username].exists)
+        
+        app.buttons["logout button"].tap()
+        
+        app.alerts["Пока_пока"].scrollViews.otherElements.buttons["doing_action"].tap()
+        sleep(3)
+        XCTAssertTrue(app.buttons["Authenticate"].exists)
     }
 }

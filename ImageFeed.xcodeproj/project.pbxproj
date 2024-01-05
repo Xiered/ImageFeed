@@ -78,6 +78,7 @@
 		C4635A7B2B3B97DE0000EFA5 /* testCodeFromURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testCodeFromURL.swift; sourceTree = "<group>"; };
 		C4635A812B3BA7210000EFA5 /* ImageFeedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4635A832B3BA7210000EFA5 /* ImageFeedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFeedUITests.swift; sourceTree = "<group>"; };
+		C4635A8C2B3BBCFE0000EFA5 /* ImageFeed.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ImageFeed.xctestplan; sourceTree = "<group>"; };
 		C47129682B167AD800C5C412 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		C4732B822B063B3000EA1161 /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
 		C4732B842B063C0C00EA1161 /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
@@ -192,6 +193,7 @@
 		C47E9B142AD11B730072D003 = {
 			isa = PBXGroup;
 			children = (
+				C4635A8C2B3BBCFE0000EFA5 /* ImageFeed.xctestplan */,
 				C47E9B1F2AD11B730072D003 /* ImageFeed */,
 				C4635A6B2B3B8A460000EFA5 /* ImageFeedTests */,
 				C4635A822B3BA7210000EFA5 /* ImageFeedUITests */,
