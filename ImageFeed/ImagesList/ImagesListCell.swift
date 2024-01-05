@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public final class ImagesListCell: UITableViewCell {
+final class ImagesListCell: UITableViewCell {
     weak var delegate: ImagesListCellDelegate?
     static let reuseIdentifier = "ImagesListCell"
 

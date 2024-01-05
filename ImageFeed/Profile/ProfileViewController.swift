@@ -4,7 +4,7 @@ import WebKit
 import ProgressHUD
 import SwiftKeychainWrapper
 
-final class ProfileViewController: UIViewController {
+ final class ProfileViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -39,17 +39,17 @@ final class ProfileViewController: UIViewController {
         updateAvatar()
         updateProfileDetails(profile: profileService.profile)
     }
-    
-    private func updateAvatar() {
-        guard
+     
+     private   func updateAvatar() {
+         guard
             let profileImageURL = profileImageService.avatarURL,
             let url = URL(string: profileImageURL)
-        else { return }
-        let placeholder = UIImage(systemName: "profile_view")
-        avatarImage.kf.setImage(with: url, placeholder: placeholder)
-    }
-    
-    private func updateProfileDetails(profile: Profile?) {
+         else { return }
+         let placeholder = UIImage(systemName: "profile_view")
+         avatarImage.kf.setImage(with: url, placeholder: placeholder)
+     }
+     
+     private func updateProfileDetails(profile: Profile?) {
         if let profile = profile {
             nameLabel.text = profile.name
             loginLabel.text = profile.loginName
