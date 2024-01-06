@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-final class ImagesListCell: UITableViewCell {
+public final class ImagesListCell: UITableViewCell {
     weak var delegate: ImagesListCellDelegate?
     static let reuseIdentifier = "ImagesListCell"
 
@@ -20,7 +20,7 @@ final class ImagesListCell: UITableViewCell {
         }
     }
     
-    override func prepareForReuse() { // For avoid bugs
+    public override func prepareForReuse() { // For avoid bugs
         super.prepareForReuse()
         cellImage.kf.cancelDownloadTask() // Сanceling cell loading to avoid bugs when reusing a cell
     }

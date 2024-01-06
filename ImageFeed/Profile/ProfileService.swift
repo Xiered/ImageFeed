@@ -1,6 +1,12 @@
 import UIKit
 
-final class ProfileService {
+protocol ProfileServiceProtocol {
+    var profile: Profile? { get }
+    func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void)
+}
+
+final class ProfileService: ProfileServiceProtocol {
+    
     static let shared = ProfileService()
     private(set) var profile: Profile?
     private var fetchTask: URLSessionTask?
@@ -44,7 +50,7 @@ struct ProfileResult: Codable { // Structure for Unsplash answer decoding
     }
 }
 
-struct Profile: Codable {
+public struct Profile: Codable {
     var userName: String
     var name: String
     var loginName: String

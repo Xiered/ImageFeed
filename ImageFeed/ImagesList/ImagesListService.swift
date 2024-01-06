@@ -1,6 +1,6 @@
 import UIKit
 
-final class ImagesListService {
+final class ImagesListService  {
     private var lastLoadedPage: Int? = nil
     private (set) var photos: [Photo] = []
     static let DidChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
