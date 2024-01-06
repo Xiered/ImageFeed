@@ -57,6 +57,11 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
          let placeholder = UIImage(systemName: "profile_view")
          avatarImage.kf.setImage(with: url, placeholder: placeholder)
      }
+    
+    func configure(_ presenter: ProfileViewPresenterProtocol) {
+        self.presenter = presenter
+        self.presenter?.view = self
+    }
      
      func updateProfileDetails(profile: Profile?) {
          if let profile = profile {

@@ -1,8 +1,14 @@
 import UIKit
 import Kingfisher
 
+public protocol ImagesListViewControllerProtocol {
+    var presenter: ImagesListViewPresenterProtocol? { get set }
+    func updateTableViewAnimated(oldCount: Int, newCount: Int)
+}
+
 final class ImagesListViewController: UIViewController {
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
+    internal var presenter: ImagesListViewPresenterProtocol?
     
     @IBOutlet private var tableView: UITableView!
 
@@ -39,6 +45,11 @@ final class ImagesListViewController: UIViewController {
         }
     }
     
+    func configure(_ presenter: ImagesListViewPresenterProtocol) {
+        self.presenter = presenter
+        self.presenter?.view = self
+    }
+    
     @objc func updateTableView() {
         let previousCount = photos.count
         let newCount = imagesListService.photos.count
@@ -52,7 +63,7 @@ final class ImagesListViewController: UIViewController {
                 tableView.insertRows(at: indexPaths, with: .automatic)
             }, completion: nil)
         }
-    }
+    } 
     
     func tableView(
         _ tableView: UITableView,
@@ -172,4 +183,17 @@ extension ImagesListViewController: ImagesListCellDelegate {
             }
         }
     }
+}
+
+extension ImagesListViewController: ImagesListViewControllerProtocol {
+
+    func updateTableViewAnimated(oldCount: Int, newCount: Int) {
+        tableView.performBatchUpdates {
+            let indexPaths = (oldCount..<newCount).map { i in
+                IndexPath(row: i, section: 0)
+            }
+            tableView.insertRows(at: indexPaths, with: .automatic)
+        } completion: { _ in }
+    }
+    
 }
