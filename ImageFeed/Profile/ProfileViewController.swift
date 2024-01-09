@@ -4,17 +4,23 @@ import WebKit
 import ProgressHUD
 import SwiftKeychainWrapper
 
-final class ProfileViewController: UIViewController {
+public protocol ProfileViewControllerProtocol: AnyObject {
+     var presenter: ProfileViewPresenterProtocol? { get }
+     func updateAvatar()
+     func updateProfileDetails(profile: Profile?)
+}
+
+final class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
     
     // MARK: - Properties
-    
+      var presenter: ProfileViewPresenterProtocol?
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
     private let profileImageService = ProfileImageService.shared
-    private var nameLabel: UILabel!
-    private var loginLabel: UILabel!
-    private var avatarImage: UIImageView!
-    private var descriptionLabel: UILabel!
+    internal var nameLabel: UILabel!
+    internal var loginLabel: UILabel!
+    internal var avatarImage: UIImageView!
+    internal var descriptionLabel: UILabel!
     private var logoutButton: UIButton!
     private let tokenStorage = OAuth2TokenStorage()
     
@@ -26,32 +32,37 @@ final class ProfileViewController: UIViewController {
     }
     
     // MARK: - Methods
-    // Subscription for avatar updating
-    private func subscriptionForNotification() {
-        profileImageServiceObserver = NotificationCenter.default
-            .addObserver(forName: ProfileImageService.DidChangeNotification,
-                         object: nil,
-                         queue: .main)
-        { [weak  self] _ in
-            guard let self = self else { return }
-            self.updateAvatar()
-        }
-        updateAvatar()
-        updateProfileDetails(profile: profileService.profile)
-    }
-    
-    private func updateAvatar() {
-        guard
+     // Subscription for avatar updating
+     private func subscriptionForNotification() {
+         profileImageServiceObserver = NotificationCenter.default
+             .addObserver(forName: ProfileImageService.DidChangeNotification,
+                          object: nil,
+                          queue: .main)
+         { [weak  self] _ in
+             guard let self = self else { return }
+             self.presenter?.updateAvatar()
+         }
+         presenter?.updateAvatar()
+         updateProfileDetails(profile: profileService.profile)
+     }
+     
+     func updateAvatar() {
+         guard
             let profileImageURL = profileImageService.avatarURL,
             let url = URL(string: profileImageURL)
-        else { return }
-        let placeholder = UIImage(systemName: "profile_view")
-        avatarImage.kf.setImage(with: url, placeholder: placeholder)
-    }
+         else { return }
+         let placeholder = UIImage(systemName: "profile_view")
+         avatarImage.kf.setImage(with: url, placeholder: placeholder)
+     }
     
-    private func updateProfileDetails(profile: Profile?) {
-        if let profile = profile {
-            nameLabel.text = profile.name
+    func configure(_ presenter: ProfileViewPresenterProtocol) {
+        self.presenter = presenter
+        self.presenter?.view = self
+    }
+     
+     func updateProfileDetails(profile: Profile?) {
+         if let profile = profile {
+             nameLabel.text = profile.name
             loginLabel.text = profile.loginName
             descriptionLabel.text = profile.bio
         } else {
@@ -59,7 +70,7 @@ final class ProfileViewController: UIViewController {
             loginLabel.text = "Error with login"
             descriptionLabel.text = "Error with description"
         }
-    }
+    } 
     // Options for Profile avatar
     private func makingAvatarImage(safeArea: UILayoutGuide) {
         avatarImage = UIImageView()
@@ -107,6 +118,7 @@ final class ProfileViewController: UIViewController {
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.tintColor = UIColor(named: "YP Red")
         logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+        logoutButton.accessibilityIdentifier = "logout button"
     }
     
     // Merging methods for UI (View-elements, constraints, update-functions)
@@ -148,10 +160,12 @@ final class ProfileViewController: UIViewController {
     
     @objc private func logoutButtonTapped() { // Alert for logout button action
         let alert = UIAlertController(title: "Пока, Пока!", message: "Уверены, что хотите выйти?", preferredStyle: .alert)
+        alert.view.accessibilityIdentifier = "Пока_пока"
         let doingAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
             guard let self = self else {return}
             self.accountLogout()
         }
+        doingAction.accessibilityIdentifier = "doing_action"
         let cancelAction = UIAlertAction(title: "Нет", style: .cancel, handler: nil)
         alert.addAction(doingAction)
         alert.addAction(cancelAction)
