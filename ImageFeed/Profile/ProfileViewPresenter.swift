@@ -1,5 +1,4 @@
 import Foundation
-import UIKit
 
 public protocol ProfileViewPresenterProtocol {
     var view: ProfileViewControllerProtocol? { get set }
@@ -9,8 +8,7 @@ public protocol ProfileViewPresenterProtocol {
 
 final class ProfileViewPresenter: ProfileViewPresenterProtocol {
     
-    
-    var view: ProfileViewControllerProtocol?
+   weak var view: ProfileViewControllerProtocol?
      private let profileService: ProfileServiceProtocol
      private let profileImageService: ProfileImageServiceProtocol
      

@@ -4,16 +4,13 @@ import WebKit
 import ProgressHUD
 import SwiftKeychainWrapper
 
- public protocol ProfileViewControllerProtocol {
+public protocol ProfileViewControllerProtocol: AnyObject {
      var presenter: ProfileViewPresenterProtocol? { get }
      func updateAvatar()
      func updateProfileDetails(profile: Profile?)
 }
 
 final class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
-  
-    
-    
     
     // MARK: - Properties
       var presenter: ProfileViewPresenterProtocol?

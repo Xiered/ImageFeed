@@ -7,7 +7,7 @@ public protocol ImagesListViewPresenterProtocol {
 }
 
 final class ImagesListViewPresenter: ImagesListViewPresenterProtocol {
-    var view: ImagesListViewControllerProtocol?
+   weak var view: ImagesListViewControllerProtocol?
     private var imagesListService = ImagesListService.shared
     private var photos: [Photo] = []
     
